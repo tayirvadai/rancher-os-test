@@ -1,0 +1,45 @@
+#cloud-config
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDpCtBduMnzXxLCYe4ury3Mwn11AbkugcE0XP7lcYFNqq8OFy63Xv83gpRwVnD3+6G/YTf2H1C5GFFVGlQrDGBmvnlm6xUHpmLfU05f1KKM2iSndNY9t8QD9YRWWORcjMKXKOSA4uE2hF5vHrWYYsgaeESrmKu6fnVYrgjm2ALDrS3wi5aTFPQIRSCnigw2ivNH2KmMZnqjzqo/G1bI96PF6zkukzTUc+y00kQbjGCH2w3PNitk0+65124z/LrF6GoRlyHaurk8G/3vc9WAMZysOmW/9quEkRcU4HxjQqH5sPo6r77RItZtdEx+klvu+WX8X+ojBldpR1Sq9TxQWcOOEx5i90yHH7V4bO5T6WLEVX8EzDo7EC4tyAI0slRr7/bZccuE+LLzULPz+tDcIAmIjpTSg3oLgDwiqBiQp/bFtGSCqwPugXEcwh3TPzH3PTikVivpoTvYZZrywPQhLY5423mLafoM70bjc5DFRFNNFujP3dQtV0JMzPquzRdqc027P9k/Y3jR4+Gi7kRrlUYHa6BuoAfhjnTBMm/wzr1TtU0cuO0pMc5wKxwqmfniB/DuPpbPip1qNHdLLzgmFOpzis7wxfs6lYLwWQ14d9aBBrb4OqBr/4PT726tz2anPMUXXvYmWApe1sNaMCuDGK5dAA1auRHguaueZoYjxytGrQ== tayirvadai.vikram@gmail.com
+write_files:
+  - path: /var/lib/rancher/conf/cloud-config.yml
+    permissions: "0644"
+    owner: root
+    content: |
+      #cloud-config
+      ssh_authorized_keys:
+	- ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDpCtBduMnzXxLCYe4ury3Mwn11AbkugcE0XP7lcYFNqq8OFy63Xv83gpRwVnD3+6G/YTf2H1C5GFFVGlQrDGBmvnlm6xUHpmLfU05f1KKM2iSndNY9t8QD9YRWWORcjMKXKOSA4uE2hF5vHrWYYsgaeESrmKu6fnVYrgjm2ALDrS3wi5aTFPQIRSCnigw2ivNH2KmMZnqjzqo/G1bI96PF6zkukzTUc+y00kQbjGCH2w3PNitk0+65124z/LrF6GoRlyHaurk8G/3vc9WAMZysOmW/9quEkRcU4HxjQqH5sPo6r77RItZtdEx+klvu+WX8X+ojBldpR1Sq9TxQWcOOEx5i90yHH7V4bO5T6WLEVX8EzDo7EC4tyAI0slRr7/bZccuE+LLzULPz+tDcIAmIjpTSg3oLgDwiqBiQp/bFtGSCqwPugXEcwh3TPzH3PTikVivpoTvYZZrywPQhLY5423mLafoM70bjc5DFRFNNFujP3dQtV0JMzPquzRdqc027P9k/Y3jR4+Gi7kRrlUYHa6BuoAfhjnTBMm/wzr1TtU0cuO0pMc5wKxwqmfniB/DuPpbPip1qNHdLLzgmFOpzis7wxfs6lYLwWQ14d9aBBrb4OqBr/4PT726tz2anPMUXXvYmWApe1sNaMCuDGK5dAA1auRHguaueZoYjxytGrQ== tayirvadai.vikram@gmail.com
+      rancher:
+        state:
+          dev: LABEL=RANCHER_STATE
+        services_include:
+          ubuntu-console: true
+        network:
+          dns:
+            override: true
+            nameservers:
+              - 192.168.30.11
+              - 192.168.30.12
+          interfaces:
+            eth0:
+              dhcp: true
+            eth1:
+              dhcp: false
+hostname: rancher-tayirvadai
+rancher:
+  state:
+    dev: LABEL=RANCHER_STATE
+  services_include:
+    ubuntu-console: true
+  console: ubuntu
+  network:
+    dns:
+      override: true
+      nameservers:
+        - 192.168.30.11
+        - 192.168.30.12
+    interfaces:
+      eth0:
+        dhcp: true
+      eth1:
+        dhcp: false
